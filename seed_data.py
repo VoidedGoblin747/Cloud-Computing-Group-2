@@ -3,11 +3,18 @@
 # Run once (with MongoDB running):  python seed_data.py
 
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
+from dotenv import load_dotenv
 from pymongo import MongoClient
 
-MONGO_URI = os.environ.get('MONGO_URI', 'mongodb://localhost:27017/task_tracker')
+# Load variables from the local .env file
+load_dotenv()
+
+MONGO_URI = os.environ.get(
+    'MONGO_URI',
+    'mongodb://localhost:27017/task_tracker'
+)
 
 client = MongoClient(MONGO_URI)
 db = client.get_default_database()
@@ -18,7 +25,7 @@ tasks = db['tasks']
 # clear old sample data so we don't pile up duplicates
 tasks.delete_many({})
 
-today = datetime.utcnow()
+today = datetime.now(timezone.utc)
 
 
 def days(n):

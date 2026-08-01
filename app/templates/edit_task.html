@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Task - Smart Task Tracker{% endblock %}
+
+{% block content %}
+<h1>✏️ Edit Task</h1>
+<form method="POST" class="task-form">
+    <div class="form-group">
+        <label for="title">Task Title *</label>
+        <input type="text" id="title" name="title" value="{{ task.title }}" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="3">{{ task.description }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="priority">Priority</label>
+        <select id="priority" name="priority">
+            <option value="low" {% if task.priority == 'low' %}selected{% endif %}>Low</option>
+            <option value="medium" {% if task.priority == 'medium' %}selected{% endif %}>Medium</option>
+            <option value="high" {% if task.priority == 'high' %}selected{% endif %}>High</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="deadline">Deadline</label>
+        <input type="date" id="deadline" name="deadline" value="{{ task.deadline }}">
+    </div>
+    <div class="form-group">
+        <label for="status">Status</label>
+        <select id="status" name="status">
+            <option value="pending" {% if task.status == 'pending' %}selected{% endif %}>Pending</option>
+            <option value="completed" {% if task.status == 'completed' %}selected{% endif %}>Completed</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Task</button>
+</form>
+{% endblock %}

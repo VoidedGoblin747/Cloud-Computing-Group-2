@@ -1,11 +1,14 @@
-# Google App Engine config
-runtime: python39
-entrypoint: gunicorn -b :$PORT app:app
+# Google App Engine configuration
+runtime: python313
+
+entrypoint: gunicorn -b :$PORT app.main:app
+
+automatic_scaling:
+  max_instances: 2
 
 env_variables:
-  # put the real MongoDB connection string here before deploying
-  # (do NOT commit the real password)
-  MONGO_URI: "mongodb://your-mongodb-ip:27017/task_tracker"
+  MONGO_URI: "PLACEHOLDER"
+  SECRET_KEY: "PLACEHOLDER"
 
 handlers:
 - url: /static

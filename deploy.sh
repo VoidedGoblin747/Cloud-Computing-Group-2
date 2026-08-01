@@ -12,5 +12,5 @@ python -m pytest tests/ || echo "tests skipped/failed - check MongoDB is running
 # deploy to App Engine
 gcloud app deploy app.yaml
 
-echo "✅ Deployment complete!"
+echo " Deployment complete!"
 echo "🌐 Visit: https://your-project-id.appspot.com"

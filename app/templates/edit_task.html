@@ -3,16 +3,26 @@
 {% block title %}Edit Task - Smart Task Tracker{% endblock %}
 
 {% block content %}
-<h1>✏️ Edit Task</h1>
-<form method="POST" class="task-form">
+<h1 class="task-form-title">✏️ Edit Task</h1>
+
+<form method="POST" class="task-form fade-in">
+
+    <!-- Gundam HUD Corners -->
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
     <div class="form-group">
         <label for="title">Task Title *</label>
         <input type="text" id="title" name="title" value="{{ task.title }}" required>
     </div>
+
     <div class="form-group">
         <label for="description">Description</label>
         <textarea id="description" name="description" rows="3">{{ task.description }}</textarea>
     </div>
+
     <div class="form-group">
         <label for="priority">Priority</label>
         <select id="priority" name="priority">
@@ -21,10 +31,12 @@
             <option value="high" {% if task.priority == 'high' %}selected{% endif %}>High</option>
         </select>
     </div>
+
     <div class="form-group">
         <label for="deadline">Deadline</label>
         <input type="date" id="deadline" name="deadline" value="{{ task.deadline }}">
     </div>
+
     <div class="form-group">
         <label for="status">Status</label>
         <select id="status" name="status">
@@ -32,6 +44,7 @@
             <option value="completed" {% if task.status == 'completed' %}selected{% endif %}>Completed</option>
         </select>
     </div>
+
     <button type="submit" class="btn btn-primary">Update Task</button>
 </form>
 {% endblock %}

@@ -3,23 +3,39 @@
 {% block title %}Dashboard - Smart Task Tracker{% endblock %}
 
 {% block content %}
-<h1>📊 Task Dashboard</h1>
 
+<h1 class="page-title">Task Dashboard</h1>
+
+<!-- Stats -->
 <div class="stats">
     <div class="stat-card">
+		<div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
         <h3>Total Tasks</h3>
         <p>{{ tasks|length }}</p>
     </div>
     <div class="stat-card">
+		<div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
         <h3>Completed</h3>
         <p>{{ tasks|selectattr('status', 'equalto', 'completed')|list|length }}</p>
     </div>
     <div class="stat-card">
+		<div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
         <h3>Pending</h3>
         <p>{{ tasks|selectattr('status', 'equalto', 'pending')|list|length }}</p>
+		
     </div>
 </div>
 
+<!-- Priority Filter -->
 <div class="filter-bar">
     <label for="priority-filter">Filter by priority:</label>
     <select id="priority-filter">
@@ -30,30 +46,53 @@
     </select>
 </div>
 
+<!-- Task Grid -->
 <div class="task-grid">
     {% for task in tasks %}
-    <div class="task-card priority-{{ task.priority }}" data-priority="{{ task.priority }}">
+    <div class="task-card fade-in" data-priority="{{ task.priority|lower }}">
+
+        <!-- Gundam HUD Corners -->
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+
+        <!-- Title -->
         <div class="title">{{ task.title }}</div>
+
+        <!-- Description -->
         <div class="description">{{ task.description or 'No description' }}</div>
+
+        <!-- Status + Priority -->
         <div class="meta">
-            <span class="status-badge status-{{ task.status }}">{{ task.status|title }}</span>
+            <span class="status-badge status-{{ task.status }}">
+                {{ task.status|title }}
+            </span>
             <span>Priority: {{ task.priority|title }}</span>
         </div>
+
+        <!-- Dates -->
         <div class="meta">
-            <span>📅 {{ task.deadline or 'No deadline' }}</span>
-            <span>🕐 {{ task.created_at.strftime('%Y-%m-%d') if task.created_at else 'N/A' }}</span>
+            <span>{{ task.deadline or 'No deadline' }}</span>
+            <span>{{ task.created_at.strftime('%Y-%m-%d') if task.created_at else 'N/A' }}</span>
         </div>
+
+        <!-- Actions -->
         <div class="task-actions">
-            <a href="/edit/{{ task._id }}" class="btn btn-primary btn-sm">✏️ Edit</a>
+            <a href="/edit/{{ task._id }}" class="btn btn-primary btn-sm">Edit</a>
+
             {% if task.status != 'completed' %}
-            <a href="/complete/{{ task._id }}" class="btn btn-success btn-sm">✅ Complete</a>
+            <a href="/complete/{{ task._id }}" class="btn btn-success btn-sm">Complete</a>
             {% endif %}
+
             <a href="/delete/{{ task._id }}" class="btn btn-danger btn-sm"
-               onclick="return confirm('Delete this task?')">🗑️ Delete</a>
+               onclick="return confirm('Delete this task?')">Delete</a>
         </div>
+
     </div>
     {% else %}
     <p>No tasks yet. Click "Add Task" to create your first one!</p>
     {% endfor %}
 </div>
+
 {% endblock %}

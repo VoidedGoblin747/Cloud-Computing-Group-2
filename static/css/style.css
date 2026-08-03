@@ -1,4 +1,6 @@
-/* static/css/style.css */
+/* ============================================================
+   ROOT COLORS — Mighty Strike Freedom Gundam Palette
+   ============================================================ */
 :root {
     --primary: #4a6cf7;
     --success: #28a745;
@@ -7,24 +9,54 @@
     --info: #17a2b8;
     --dark: #343a40;
     --light: #f8f9fa;
+
+    /* Gundam Theme */
+    --gundam-blue: #0b1e6b;
+    --gundam-red: #d90429;
+    --gundam-gold: #f2c94c;
+    --gundam-white: #f2f2f2;
+    --gundam-metal: #c7c7c7;
 }
 
+/* ============================================================
+   GLOBAL RESET
+   ============================================================ */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* ============================================================
+   GLOBAL BACKGROUND — Mighty Strike Freedom
+   ============================================================ */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--light);
+    background-image: url("../image/Gundam_Mighty_Freedom.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: var(--dark);
+    position: relative;
 }
 
+/* Soft overlay for readability */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(2px);
+    z-index: -1;
+}
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
 .navbar {
-    background: var(--dark);
+    background: var(--gundam-blue);
     padding: 1rem 2rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 .nav-container {
@@ -36,7 +68,7 @@ body {
 }
 
 .nav-brand {
-    color: white;
+    color: var(--gundam-white);
     font-size: 1.5rem;
     font-weight: bold;
     text-decoration: none;
@@ -49,49 +81,38 @@ body {
 }
 
 .nav-menu a {
-    color: white;
+    color: var(--gundam-white);
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .nav-menu a:hover {
-    color: var(--primary);
+    color: var(--gundam-gold);
 }
 
+/* ============================================================
+   PAGE CONTAINER
+   ============================================================ */
 .container {
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 2rem;
 }
 
-/* Dashboard stats */
-.stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
-    margin: 1.5rem 0;
+/* ============================================================
+   PAGE TITLES — Gundam HUD Yellow
+   ============================================================ */
+.page-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #ffd447;
+    text-shadow: 0 0 10px rgba(255, 212, 71, 0.7);
 }
 
-.stat-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.stat-card h3 {
-    color: #888;
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-}
-
-.stat-card p {
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--primary);
-}
-
+/* ============================================================
+   FILTER BAR
+   ============================================================ */
 .filter-bar {
     margin: 1rem 0;
 }
@@ -102,35 +123,99 @@ body {
     border-radius: 4px;
 }
 
-/* Task cards */
+/* ============================================================
+   TASK CARDS — Gundam Hologram Panels
+   ============================================================ */
 .task-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     gap: 1.5rem;
     margin-top: 2rem;
 }
 
 .task-card {
-    background: white;
-    border-radius: 8px;
+    background: rgba(13, 17, 23, 0.55);
+    border-radius: 10px;
     padding: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
-    border-left: 4px solid var(--primary);
+    position: relative;
+    overflow: hidden;
+
+    border: 1px solid rgba(76, 162, 242, 0.6);
+    box-shadow: 0 0 12px rgba(76, 162, 242, 0.4);
+
+    backdrop-filter: blur(6px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .task-card:hover {
     transform: translateY(-4px);
+    box-shadow: 0 0 18px rgba(242, 201, 76, 0.7);
 }
 
+/* Scanline hologram overlay */
+.task-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 255, 255, 0.05) 2px,
+        transparent 4px
+    );
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+/* Animated shimmer sweep */
+.task-card::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(76, 162, 242, 0.25),
+        transparent
+    );
+    animation: hologramShimmer 3s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes hologramShimmer {
+    0% { top: -100%; }
+    100% { top: 100%; }
+}
+
+/* Priority glow colors */
+.task-card[data-priority="high"] {
+    border-color: rgba(217, 4, 41, 0.9);
+    box-shadow: 0 0 14px rgba(217, 4, 41, 0.6);
+}
+
+.task-card[data-priority="medium"] {
+    border-color: rgba(242, 201, 76, 0.9);
+    box-shadow: 0 0 14px rgba(242, 201, 76, 0.6);
+}
+
+.task-card[data-priority="low"] {
+    border-color: rgba(40, 167, 69, 0.9);
+    box-shadow: 0 0 14px rgba(40, 167, 69, 0.6);
+}
+
+/* Title, description, metadata */
 .task-card .title {
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
+    color: var(--gundam-white);
 }
 
 .task-card .description {
-    color: #666;
+    color: #d0d0d0;
     margin-bottom: 1rem;
 }
 
@@ -138,14 +223,13 @@ body {
     display: flex;
     justify-content: space-between;
     font-size: 0.9rem;
-    color: #888;
+    color: #b5b5b5;
     margin-bottom: 0.5rem;
 }
 
-.priority-high { border-left-color: var(--danger); }
-.priority-medium { border-left-color: var(--warning); }
-.priority-low { border-left-color: var(--success); }
-
+/* ============================================================
+   STATUS BADGES
+   ============================================================ */
 .status-badge {
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
@@ -163,7 +247,9 @@ body {
     color: #856404;
 }
 
-/* Buttons */
+/* ============================================================
+   BUTTONS — Gundam Gradient
+   ============================================================ */
 .btn {
     padding: 0.5rem 1rem;
     border: none;
@@ -171,16 +257,17 @@ body {
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.2s;
 }
 
 .btn-primary {
-    background: var(--primary);
+    background: linear-gradient(90deg, var(--gundam-blue), var(--gundam-red));
     color: white;
 }
 
 .btn-primary:hover {
-    background: #3a56d4;
+    transform: translateY(-2px);
+    opacity: 0.9;
 }
 
 .btn-danger {
@@ -198,43 +285,271 @@ body {
     font-size: 0.85rem;
 }
 
-/* Forms */
+/* ============================================================
+   GUNDAM FORM PANELS — Hologram Input Console
+   ============================================================ */
 .task-form {
-    max-width: 600px;
-    margin: 2rem 0;
+    max-width: 650px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 12px;
+
+    background: rgba(13, 17, 23, 0.55);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 18px rgba(76, 162, 242, 0.4);
+    border: 1px solid rgba(76, 162, 242, 0.6);
+
+    position: relative;
+    overflow: hidden;
 }
 
-.form-group {
-    margin-bottom: 1.5rem;
+/* Scanline overlay */
+.task-form::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.05),
+        rgba(255,255,255,0.05) 2px,
+        transparent 4px
+    );
+    opacity: 0.25;
+    pointer-events: none;
 }
 
+/* Shimmer animation */
+.task-form::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(76, 162, 242, 0.25),
+        transparent
+    );
+    animation: hologramShimmer 3s linear infinite;
+    pointer-events: none;
+}
+
+/* Gundam gold labels */
 .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
+    font-weight: 600;
+    color: var(--gundam-gold);
+    text-shadow: 0 0 6px rgba(242, 201, 76, 0.6);
 }
 
+/* Hologram inputs */
 .form-group input,
 .form-group textarea,
 .form-group select {
-    width: 100%;
+    background: rgba(255,255,255,0.1);
+    color: var(--gundam-white);
+    border: 1px solid rgba(76, 162, 242, 0.6);
+    border-radius: 6px;
     padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
+/* Focus glow */
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
+    border-color: var(--gundam-gold);
+    box-shadow: 0 0 12px rgba(242, 201, 76, 0.7);
     outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.2);
 }
 
-.task-actions {
+/* Priority dropdown colors */
+#priority option[value="high"] {
+    color: var(--gundam-red);
+}
+#priority option[value="medium"] {
+    color: var(--gundam-gold);
+}
+#priority option[value="low"] {
+    color: var(--success);
+}
+
+/* ============================================================
+   FORM TITLE — Red HUD + Shimmer
+   ============================================================ */
+.task-form-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 20px;
+
+    /* Solid red text */
+   		color: #FF1A1A;
+	
+    /* Red hologram glow */
+    text-shadow:
+        0 0 6px rgba(217, 4, 41, 0.7),
+        0 0 12px rgba(217, 4, 41, 0.5);
+
+    position: relative;
+    overflow: hidden;
+}
+
+/* Scanlines */
+.task-form-title::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.08),
+        rgba(255,255,255,0.08) 2px,
+        transparent 4px
+    );
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+/* Shimmer */
+.task-form-title::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(255,255,255,0.35),
+        transparent
+    );
+    animation: titleShimmer 2.8s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes titleShimmer {
+    0% { top: -100%; }
+    100% { top: 100%; }
+}
+
+/* ============================================================
+   HUD CORNERS — Scoped
+   ============================================================ */
+
+/* Form corners */
+.task-form .corner {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(76, 162, 242, 0.8);
+}
+
+.task-form .corner.tl { top: 6px; left: 6px; border-right: none; border-bottom: none; }
+.task-form .corner.tr { top: 6px; right: 6px; border-left: none; border-bottom: none; }
+.task-form .corner.bl { bottom: 6px; left: 6px; border-right: none; border-top: none; }
+.task-form .corner.br { bottom: 6px; right: 6px; border-left: none; border-top: none; }
+
+/* Stat card corners */
+.stat-card .corner {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 2px solid cyan;
+    opacity: 0.8;
+}
+
+.stat-card .corner.tl { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+.stat-card .corner.tr { top: -2px; right: -2px; border-left: none; border-bottom: none; }
+.stat-card .corner.bl { bottom: -2px; left: -2px; border-right: none; border-top: none; }
+.stat-card .corner.br { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+/* ============================================================
+   GUNDAM HOLOGRAM STAT CARDS
+   ============================================================ */
+.stats {
     display: flex;
-    gap: 0.5rem;
-    margin-top: 1rem;
-    flex-wrap: wrap;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    position: relative;
+    padding: 25px;
+    width: 260px;
+    height: 140px;
+
+    background: rgba(0, 255, 255, 0.08);
+    border: 1px solid rgba(0, 255, 255, 0.35);
+    backdrop-filter: blur(6px);
+
+    box-shadow: 0 0 14px rgba(0, 255, 255, 0.4),
+                inset 0 0 14px rgba(0, 255, 255, 0.25);
+
+    transform: perspective(800px) rotateX(2deg);
+    animation: statFadeIn 0.8s ease-out;
+}
+
+@keyframes statFadeIn {
+    from {
+        opacity: 0;
+        transform: perspective(800px) rotateX(8deg);
+    }
+    to {
+        opacity: 1;
+        transform: perspective(800px) rotateX(2deg);
+    }
+}
+
+/* Scanlines */
+.stat-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 255, 255, 0.05) 2px,
+        transparent 4px
+    );
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+/* Shimmer */
+.stat-card::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(0, 255, 255, 0.25),
+        transparent
+    );
+    animation: statShimmer 3s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes statShimmer {
+    0% { top: -100%; }
+    100% { top: 100%; }
+}
+
+.stat-card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: cyan;
+    text-shadow: 0 0 6px rgba(0, 255, 255, 0.6);
+}
+
+.stat-card p {
+    font-size: 2rem;
+    margin-top: 10px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
 }

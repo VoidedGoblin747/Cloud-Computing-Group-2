@@ -32,7 +32,7 @@
    ============================================================ */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-image: url("../image/Gundam_Mighty_Freedom.jpg");
+	background-image: url("/static/image/forest.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -40,15 +40,15 @@ body {
     position: relative;
 }
 
-/* Soft overlay for readability */
+/* Soft overlay for readability
 body::before {
     content: "";
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.45);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(10px);
     z-index: -1;
-}
+}*/
 
 /* ============================================================
    NAVBAR
@@ -106,20 +106,22 @@ body::before {
     font-size: 28px;
     font-weight: 600;
     margin-bottom: 20px;
-    color: #ffd447;
-    text-shadow: 0 0 10px rgba(255, 212, 71, 0.7);
+    color:#000000;
+    text-shadow: 2px 2px 6px rgba(255, 255, 255, 0.8); /* soft white glow */
 }
 
 /* ============================================================
    FILTER BAR
    ============================================================ */
 .filter-bar {
+	color: white;
+	text-shadow: 2px 2px 6px black;
     margin: 1rem 0;
 }
 
 .filter-bar select {
     padding: 0.4rem 0.6rem;
-    border: 1px solid #ddd;
+    border: 1px solid #0A0909;
     border-radius: 4px;
 }
 
@@ -128,66 +130,26 @@ body::before {
    ============================================================ */
 .task-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    gap: 2.5rem; /* increased spacing */
+    margin-top: 2.5rem;
 }
 
 .task-card {
     background: rgba(13, 17, 23, 0.55);
     border-radius: 10px;
-    padding: 1.5rem;
+    padding: 2rem; /* more breathing room */
     position: relative;
     overflow: hidden;
 
     border: 1px solid rgba(76, 162, 242, 0.6);
-    box-shadow: 0 0 12px rgba(76, 162, 242, 0.4);
+    box-shadow: 0 0 12px blue;
 
     backdrop-filter: blur(6px);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
-.task-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 18px rgba(242, 201, 76, 0.7);
-}
-
-/* Scanline hologram overlay */
-.task-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0.05),
-        rgba(255, 255, 255, 0.05) 2px,
-        transparent 4px
-    );
-    opacity: 0.25;
-    pointer-events: none;
-}
-
-/* Animated shimmer sweep */
-.task-card::after {
-    content: "";
-    position: absolute;
-    top: -100%;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to bottom,
-        transparent,
-        rgba(76, 162, 242, 0.25),
-        transparent
-    );
-    animation: hologramShimmer 3s linear infinite;
-    pointer-events: none;
-}
-
-@keyframes hologramShimmer {
-    0% { top: -100%; }
-    100% { top: 100%; }
+    min-height: 220px; /* uniform height */
+    margin-bottom: 1.5rem; /* consistent spacing */
 }
 
 /* Priority glow colors */
@@ -215,7 +177,7 @@ body::before {
 }
 
 .task-card .description {
-    color: #d0d0d0;
+    color: #ffd447;
     margin-bottom: 1rem;
 }
 
@@ -223,7 +185,7 @@ body::before {
     display: flex;
     justify-content: space-between;
     font-size: 0.9rem;
-    color: #b5b5b5;
+    color: #ffd447;
     margin-bottom: 0.5rem;
 }
 
@@ -289,12 +251,12 @@ body::before {
    GUNDAM FORM PANELS — Hologram Input Console
    ============================================================ */
 .task-form {
-    max-width: 650px;
+    max-width: 750px;
     margin: 2rem auto;
-    padding: 2rem;
-    border-radius: 12px;
+    padding: 3rem;
+    border-radius: 15px;
 
-    background: rgba(13, 17, 23, 0.55);
+    background: linear-gradient(135deg, #434343 0%, #000000 100%);
     backdrop-filter: blur(6px);
     box-shadow: 0 0 18px rgba(76, 162, 242, 0.4);
     border: 1px solid rgba(76, 162, 242, 0.6);
@@ -303,66 +265,42 @@ body::before {
     overflow: hidden;
 }
 
-/* Scanline overlay */
-.task-form::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.05),
-        rgba(255,255,255,0.05) 2px,
-        transparent 4px
-    );
-    opacity: 0.25;
-    pointer-events: none;
-}
-
-/* Shimmer animation */
-.task-form::after {
-    content: "";
-    position: absolute;
-    top: -100%;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to bottom,
-        transparent,
-        rgba(76, 162, 242, 0.25),
-        transparent
-    );
-    animation: hologramShimmer 3s linear infinite;
-    pointer-events: none;
-}
-
 /* Gundam gold labels */
 .form-group label {
     font-weight: 600;
-    color: var(--gundam-gold);
-    text-shadow: 0 0 6px rgba(242, 201, 76, 0.6);
+    color: yellow;
+    text-shadow: 4px 4px 0px black;
 }
 
-/* Hologram inputs */
+/* Uniform text boxes */
 .form-group input,
-.form-group textarea,
 .form-group select {
+    width: 100%;              /* full width inside the card */
+    height: 45px;             /* uniform height */
+    padding: 0 0.85rem;       /* horizontal padding only */
+    line-height: 45px;        /* centers text vertically */
     background: rgba(255,255,255,0.1);
     color: var(--gundam-white);
-    border: 1px solid rgba(76, 162, 242, 0.6);
+    border: 1px solid white;
     border-radius: 6px;
-    padding: 0.75rem;
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    box-sizing: border-box;   /* prevents height/padding collisions */
+    transition: border-color 0.3s ease;
 }
 
-/* Focus glow */
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
-    border-color: var(--gundam-gold);
-    box-shadow: 0 0 12px rgba(242, 201, 76, 0.7);
-    outline: none;
+/* Uniform textarea */
+.form-group textarea {
+    width: 100%;              /* full width */
+    height: 120px;            /* consistent height */
+    padding: 0.85rem;         /* normal padding */
+    line-height: 1.4;         /* natural text flow */
+    background: rgba(255,255,255,0.1);
+    color: var(--gundam-white);
+    border: 1px solid white;
+    border-radius: 6px;
+    box-sizing: border-box;   /* prevents overflow issues */
+    transition: border-color 0.3s ease;
 }
+
 
 /* Priority dropdown colors */
 #priority option[value="high"] {
@@ -383,54 +321,11 @@ body::before {
     font-weight: 600;
     margin-bottom: 20px;
 
-    /* Solid red text */
-   		color: #FF1A1A;
-	
-    /* Red hologram glow */
-    text-shadow:
-        0 0 6px rgba(217, 4, 41, 0.7),
-        0 0 12px rgba(217, 4, 41, 0.5);
+    color: yellow;
 
+    text-shadow: 2px 2px black;
     position: relative;
     overflow: hidden;
-}
-
-/* Scanlines */
-.task-form-title::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.08),
-        rgba(255,255,255,0.08) 2px,
-        transparent 4px
-    );
-    opacity: 0.25;
-    pointer-events: none;
-}
-
-/* Shimmer */
-.task-form-title::after {
-    content: "";
-    position: absolute;
-    top: -100%;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to bottom,
-        transparent,
-        rgba(255,255,255,0.35),
-        transparent
-    );
-    animation: titleShimmer 2.8s linear infinite;
-    pointer-events: none;
-}
-
-@keyframes titleShimmer {
-    0% { top: -100%; }
-    100% { top: 100%; }
 }
 
 /* ============================================================
@@ -455,7 +350,7 @@ body::before {
     position: absolute;
     width: 14px;
     height: 14px;
-    border: 2px solid cyan;
+    border: 2px solid black;
     opacity: 0.8;
 }
 
@@ -483,73 +378,27 @@ body::before {
     border: 1px solid rgba(0, 255, 255, 0.35);
     backdrop-filter: blur(6px);
 
-    box-shadow: 0 0 14px rgba(0, 255, 255, 0.4),
-                inset 0 0 14px rgba(0, 255, 255, 0.25);
+ 	box-shadow: 
+    0 0 14px rgba(255, 255, 255, 0.7),   /* white outer glow */
+    inset 0 0 14px rgba(0, 0, 0, 0.6);   /* black inner glow */
 
-    transform: perspective(800px) rotateX(2deg);
-    animation: statFadeIn 0.8s ease-out;
+
+    /*transform: perspective(800px) rotateX(2deg);
+    animation: statFadeIn 0.8s ease-out;*/
 }
-
-@keyframes statFadeIn {
-    from {
-        opacity: 0;
-        transform: perspective(800px) rotateX(8deg);
-    }
-    to {
-        opacity: 1;
-        transform: perspective(800px) rotateX(2deg);
-    }
-}
-
-/* Scanlines */
-.stat-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0.05),
-        rgba(255, 255, 255, 0.05) 2px,
-        transparent 4px
-    );
-    opacity: 0.25;
-    pointer-events: none;
-}
-
-/* Shimmer */
-.stat-card::after {
-    content: "";
-    position: absolute;
-    top: -100%;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to bottom,
-        transparent,
-        rgba(0, 255, 255, 0.25),
-        transparent
-    );
-    animation: statShimmer 3s linear infinite;
-    pointer-events: none;
-}
-
-@keyframes statShimmer {
-    0% { top: -100%; }
-    100% { top: 100%; }
-}
-
 .stat-card h3 {
     margin: 0;
     font-size: 1.2rem;
-    color: cyan;
+    color: #FFFF00;
     text-shadow: 0 0 6px rgba(0, 255, 255, 0.6);
+	text-shadow: 2px 2px 4px black;
 }
 
 .stat-card p {
     font-size: 2rem;
     margin-top: 10px;
-    color: white;
+    color: #FFFF00;
     font-weight: bold;
-    text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+    /*text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);*/
+	text-shadow: 2px 2px 4px black;
 }
